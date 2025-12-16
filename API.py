@@ -88,11 +88,11 @@ def upload_image_to_yandex(image_url: str, folder_name: str, filename: str, toke
         "url": image_url
     }
 
-try:
-    response = requests.post(upload_url, headers=headers, params=params_upload, timeout=10)
-except requests.exceptions.RequestException as e:
-    print(f"Ошибка при загрузке файла: {e}")
-    exit(1)
+    try:
+        response = requests.post(upload_url, headers=headers, params=params, timeout=10)
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка при загрузке файла: {e}")
+        exit(1)
 
 if response.status_code == 202:
     print("Загрузка файла запрошена успешно (Яндекс.Диск скачивает картинку).")
