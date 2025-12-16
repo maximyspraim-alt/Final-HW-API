@@ -116,4 +116,22 @@ def save_backup_info(text: str, size: int | None, filename: str = "backup_info.j
         print(f"Ошибка при записи JSON-файла: {e}")
         exit(1)
 
-print("Программа завершена успешно.")
+
+# === ОСНОВНАЯ ФУНКЦИЯ ===
+
+def main():
+    FOLDER_NAME = "pd-fpy_140"
+
+    token, picture_text = get_user_input()
+    safe_filename = clean_filename(picture_text)
+    image_url, file_size = get_image_info(picture_text)
+
+    create_yandex_folder(FOLDER_NAME, token)
+    upload_image_to_yandex(image_url, FOLDER_NAME, safe_filename, token)
+    save_backup_info(picture_text, file_size)
+
+
+# === ТОЧКА ВХОДА ===
+
+if __name__ == "__main__":
+    main()
