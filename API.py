@@ -94,12 +94,12 @@ def upload_image_to_yandex(image_url: str, folder_name: str, filename: str, toke
         print(f"Ошибка при загрузке файла: {e}")
         exit(1)
 
-if response.status_code == 202:
-    print("Загрузка файла запрошена успешно (Яндекс.Диск скачивает картинку).")
-else:
-    error_msg = response.json().get('message', 'Неизвестная ошибка')
-    print(f"Ошибка при загрузке файла: {response.status_code} — {error_msg}")
-    exit(1)
+    if response.status_code == 202:
+        print("Загрузка файла запрошена успешно (Яндекс.Диск скачивает картинку).")
+    else:
+        msg = response.json().get('message', 'Неизвестная ошибка')
+        print(f"Ошибка при загрузке файла: {response.status_code} — {msg}")
+        exit(1)
 
 # === 7. Сохранение информации в JSON ===
 data = {
