@@ -77,12 +77,16 @@ def create_yandex_folder(folder_name: str, token: str) -> None:
         print(f"Ошибка при создании папки: {response.status_code} — {msg}")
         exit(1)
 
-# === 6. Загрузка картинки по URL ===
-upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
-params_upload = {
-    "path": f"{folder_name}/{safe_filename}.jpg",
-    "url": image_url
-}
+
+def upload_image_to_yandex(image_url: str, folder_name: str, filename: str, token: str) -> None:
+    """Загружает изображение на Яндекс.Диск по URL."""
+    upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
+    headers = {"Authorization": f"OAuth {token}"}
+    full_path = f"{folder_name}/{filename}.jpg"
+    params = {
+        "path": full_path,
+        "url": image_url
+    }
 
 try:
     response = requests.post(upload_url, headers=headers, params=params_upload, timeout=10)
