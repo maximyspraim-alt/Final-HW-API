@@ -30,21 +30,21 @@ encoded_text = quote(picture_text, safe='')
 image_url = f"https://cataas.com/cat/says/{encoded_text}".strip()
 folder_name = "pd-fpy_140"
 
-headers_cataas = {
-    "User-Agent": "Mozilla/5.0"
-}
-# === 4. Получение размера файла через GET с stream=True ===
-try:
-    response = requests.get(
-        image_url,
-        headers={"User-Agent": "Mozilla/5.0"},
-        timeout=10,
-        stream=True
-    )
-    if response.status_code != 200:
-        print(f"Ошибка: cataas.com вернул статус {response.status_code}")
-        response.close()
-        exit(1)
+def get_image_info(text: str) -> tuple[str, int | None]:
+    """Получает URL и размер изображения с cataas.com."""
+    encoded_text = quote(text, safe='')
+    image_url = f"https://cataas.com/cat/says/{encoded_text}"
+
+    try:
+        response = requests.get(
+            image_url,
+            headers={"User-Agent": "Mozilla/5.0"},
+            timeout=10,
+            stream=True
+        )
+        if response.status_code != 200:
+            print(f"Ошибка: cataas.com вернул статус {response.status_code}")
+            exit(1)
 
     size_str = response.headers.get('Content-Length')
     file_size = int(size_str) if size_str is not None else None
