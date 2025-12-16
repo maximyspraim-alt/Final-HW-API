@@ -51,9 +51,9 @@ def get_image_info(text: str) -> tuple[str, int | None]:
         response.close()
         return image_url, file_size
 
-except requests.exceptions.RequestException as e:
-    print(f"Ошибка соединения с cataas.com: {e}")
-    exit(1)
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка соединения с cataas.com: {e}")
+        exit(1)
 
 # === 5. Создание папки на Яндекс.Диске ===
 headers = {"Authorization": f"OAuth {token_disk}"}
