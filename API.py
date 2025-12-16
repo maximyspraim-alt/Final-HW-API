@@ -55,10 +55,12 @@ def get_image_info(text: str) -> tuple[str, int | None]:
         print(f"Ошибка соединения с cataas.com: {e}")
         exit(1)
 
-# === 5. Создание папки на Яндекс.Диске ===
-headers = {"Authorization": f"OAuth {token_disk}"}
-url_create_folder = "https://cloud-api.yandex.net/v1/disk/resources"
-params_folder = {"path": folder_name}
+
+def create_yandex_folder(folder_name: str, token: str) -> None:
+    """Создаёт папку на Яндекс.Диске, если её ещё нет."""
+    url = "https://cloud-api.yandex.net/v1/disk/resources"
+    headers = {"Authorization": f"OAuth {token}"}
+    params = {"path": folder_name}
 
 try:
     response = requests.put(url_create_folder, headers=headers, params=params_folder, timeout=10)
