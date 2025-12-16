@@ -12,10 +12,10 @@ def get_user_input() -> tuple[str, str]:
         print("Ошибка: токен не может быть пустым.")
         exit(1)
 
-picture_text = input('Введите текст для картинки: ').strip()
-if not picture_text:
-    print("Ошибка: текст не может быть пустым.")
-    exit(1)
+    text = input('Введите текст для картинки: ').strip()
+    if not text:
+        print("Ошибка: текст не может быть пустым.")
+        exit(1)
 
 # === 2. Вспомогательная функция ===
 def clean_filename(text):
