@@ -17,8 +17,11 @@ def get_user_input() -> tuple[str, str]:
         print("Ошибка: текст не может быть пустым.")
         exit(1)
 
-# === 2. Вспомогательная функция ===
-def clean_filename(text):
+    return token, text
+
+
+def clean_filename(text: str) -> str:
+    """Очищает текст для безопасного использования в имени файла."""
     return re.sub(r'[^\w\-]+', '_', text).strip('_')
 
 # === 3. Подготовка данных ===
