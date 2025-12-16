@@ -46,9 +46,10 @@ def get_image_info(text: str) -> tuple[str, int | None]:
             print(f"Ошибка: cataas.com вернул статус {response.status_code}")
             exit(1)
 
-    size_str = response.headers.get('Content-Length')
-    file_size = int(size_str) if size_str is not None else None
-    response.close()
+        size_str = response.headers.get('Content-Length')
+        file_size = int(size_str) if size_str else None
+        response.close()
+        return image_url, file_size
 
 except requests.exceptions.RequestException as e:
     print(f"Ошибка соединения с cataas.com: {e}")
