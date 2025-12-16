@@ -24,11 +24,6 @@ def clean_filename(text: str) -> str:
     """Очищает текст для безопасного использования в имени файла."""
     return re.sub(r'[^\w\-]+', '_', text).strip('_')
 
-# === 3. Подготовка данных ===
-safe_filename = clean_filename(picture_text)
-encoded_text = quote(picture_text, safe='')
-image_url = f"https://cataas.com/cat/says/{encoded_text}".strip()
-folder_name = "pd-fpy_140"
 
 def get_image_info(text: str) -> tuple[str, int | None]:
     """Получает URL и размер изображения с cataas.com."""
