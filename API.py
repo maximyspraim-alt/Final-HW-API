@@ -68,14 +68,14 @@ def create_yandex_folder(folder_name: str, token: str) -> None:
         print(f"Ошибка при создании папки: {e}")
         exit(1)
 
-if response.status_code == 201:
-    print("Папка успешно создана.")
-elif response.status_code == 409:
-    print("Папка уже существует — продолжаем.")
-else:
-    error_msg = response.json().get('message', 'Неизвестная ошибка')
-    print(f"Ошибка при создании папки: {response.status_code} — {error_msg}")
-    exit(1)
+    if response.status_code == 201:
+        print("Папка успешно создана.")
+    elif response.status_code == 409:
+        print("Папка уже существует — продолжаем.")
+    else:
+        msg = response.json().get('message', 'Неизвестная ошибка')
+        print(f"Ошибка при создании папки: {response.status_code} — {msg}")
+        exit(1)
 
 # === 6. Загрузка картинки по URL ===
 upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
