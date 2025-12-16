@@ -3,11 +3,14 @@ import requests
 import json
 from urllib.parse import quote
 
-# === 1. Ввод данных ===
-token_disk = input('Введите токен Яндекс.Диска: ').strip()
-if not token_disk:
-    print("Ошибка: токен не может быть пустым.")
-    exit(1)
+# === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
+
+def get_user_input() -> tuple[str, str]:
+    """Получает от пользователя текст для картинки и токен Яндекс.Диска."""
+    token = input('Введите токен Яндекс.Диска: ').strip()
+    if not token:
+        print("Ошибка: токен не может быть пустым.")
+        exit(1)
 
 picture_text = input('Введите текст для картинки: ').strip()
 if not picture_text:
