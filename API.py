@@ -101,18 +101,19 @@ def upload_image_to_yandex(image_url: str, folder_name: str, filename: str, toke
         print(f"Ошибка при загрузке файла: {response.status_code} — {msg}")
         exit(1)
 
-# === 7. Сохранение информации в JSON ===
-data = {
-    "filename": picture_text,
-    "size_bytes": file_size
-}
 
-try:
-    with open("backup_info.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-    print("Информация о файле сохранена в backup_info.json")
-except Exception as e:
-    print(f"Ошибка при записи JSON-файла: {e}")
-    exit(1)
+def save_backup_info(text: str, size: int | None, filename: str = "backup_info.json") -> None:
+    """Сохраняет информацию о файле в JSON."""
+    data = {
+        "filename": text,
+        "size_bytes": size
+    }
+    try:
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        print(f"Информация о файле сохранена в {filename}")
+    except Exception as e:
+        print(f"Ошибка при записи JSON-файла: {e}")
+        exit(1)
 
 print("Программа завершена успешно.")
