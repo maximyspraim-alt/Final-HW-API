@@ -62,11 +62,11 @@ def create_yandex_folder(folder_name: str, token: str) -> None:
     headers = {"Authorization": f"OAuth {token}"}
     params = {"path": folder_name}
 
-try:
-    response = requests.put(url_create_folder, headers=headers, params=params_folder, timeout=10)
-except requests.exceptions.RequestException as e:
-    print(f"Ошибка при создании папки: {e}")
-    exit(1)
+    try:
+        response = requests.put(url, headers=headers, params=params, timeout=10)
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка при создании папки: {e}")
+        exit(1)
 
 if response.status_code == 201:
     print("Папка успешно создана.")
